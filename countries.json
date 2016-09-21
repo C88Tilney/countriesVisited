@@ -1,0 +1,41 @@
+var countries = [
+    {
+        "country":"Albania"
+    },
+    {
+        "country":"Andorra"
+    },
+    {
+        "country":"Austria"
+    },
+    {
+        "country":"Azerbaijan"
+    },
+    {
+        "country":"Belarus"
+    },
+    {
+        "country":"Belgium"
+    },
+    {
+        "country":"Bosnia and Herzegovina"
+    },
+    {
+        "country":"Bulgaria"
+    },
+    {
+        "country":"Croatia"
+    },
+    {
+        "country":"Cyprus"
+    },
+    {
+        "country":"Czech Republic"
+    },
+    {
+        "country":"Denmark"
+    },
+    {
+        "country":"Estonia"
+    }
+];
