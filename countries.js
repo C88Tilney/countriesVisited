@@ -35,14 +35,14 @@ data = "countries.json";
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       data1 = xhttp.responseText;
-      alert(data1);
+      //alert(data1);
       data = JSON.parse(data1);
      //DATA PARSED NOW _ CARRY OUT ACTIONS ON THE DATA OBJECTS WITHIN HERE 
      console.log('Error:', data);
      
      //Accessing data in the nested array
-     var value = data.countries[1].country;
-     alert (value);
+     //var value = data.countries[1].country;
+     //alert (value);
      
      //loop through the nested json
      for(var i = 0, l = data.country.length; i < l; i++) {
