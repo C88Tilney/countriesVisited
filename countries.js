@@ -1,68 +1,90 @@
-//ADD EVENT LISTENERS
-window.addEventListener("load", start, false);
+// the AJAX get - It get the JSON file and fill it will all the countries
 
+function ajax_get_json() {
 
-function start(){
-     document.getElementById("countries").addEventListener("change", ps,false);
-      }
-      
-      
-function ps(){
-var personSelected = document.getElementById("countries").value; 
-alert(countryselected);
-    document.getElementById("countryselected").innerHTML = countryselected
+    var hr = new XMLHttpRequest();
+
+    hr.open("GET", "mylist.json", true);
+
+    hr.setRequestHeader("Content-type", "application/json", true);
+
+    hr.onreadystatechange = function () {
+        if (hr.readyState == 4 && hr.status == 200) {
+            var data = JSON.parse(hr.responseText);
+            var results = document.getElementById("results");
+            results.innerHTML = "";
+            for (var obj in data) {
+                results.innerHTML += '<input type="checkbox">' + data[obj].country + "<br/>";
+            }
+        }
+    }
+
+    hr.send(null);
+    results.innerHTML = "requesting..."
+
 }
 
+ajax_get_json();
 
+//ADD Event Listeners 
+document.getElementById("calculate").addEventListener("click", validate, false);
 
+//Validation Function
+function validate() {
+    var countryVisted = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    console.log(countryVisted);
+    var percentagesBeen = ((countryVisted / 49) * 100).toFixed();
+    var percentagesYetToVisit = (100 - percentagesBeen);
+    console.log(percentagesBeen);
+    console.log(percentagesYetToVisit);
 
-// Get the INPUT DATA from a JSON file and update the charts
-ajaxcall();
-
-/** **************************************************************************************** **/
-
-
-
-function ajaxcall () {
-/* Javascript AJAX REQUEST TO JSON FILE */
-data = "countries.json";
-
-// function salesfunction() {
-  //  alert(data);
-  //  data1 ="countries.json";
-  
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (xhttp.readyState == 4 && xhttp.status == 200) {
-      data1 = xhttp.responseText;
-      //alert(data1);
-      data = JSON.parse(data1);
-     //DATA PARSED NOW _ CARRY OUT ACTIONS ON THE DATA OBJECTS WITHIN HERE 
-     console.log('Error:', data);
-     
-     //Accessing data in the nested array
-     //var value = data.countries[1].country;
-     //alert (value);
-     
-     //loop through the nested json
-     for(var i = 0, l = data.country.length; i < l; i++) {
-    // alert(data.countries[i].country);
- 
- 
-    // Populate the HTML DOM Form Select Button from the JSON File contents
-    var x = document.getElementById("countries");
-    var option = document.createElement("option");
-    option.text = data.countries[i].country;
-
-    x.add(option);
-     
-         
-     }
-
-     
- /* AJAX REQUEST END ******************************************************  */
+    if (percentagesBeen == 0) {
+        var reply = "Do you live in Europe?";
     }
-  };
-  xhttp.open("GET", data, true);
-  xhttp.send();
-};  
+    else if (percentagesBeen > 0 && percentagesBeen <= 20) {
+        var reply = "You need to travel around Europe more!";
+    }
+    else if (percentagesBeen > 20 && percentagesBeen <= 50) {
+        var reply = "You pretty well Traveled, but you still need to got a lot to go!";
+    } 
+    else if (percentagesBeen > 50) {
+        var reply = "Wow! Well Done! Not many more countries to Visit now!";
+    }
+    else {
+        var reply = "error";
+    }
+    console.log(reply);
+
+    document.getElementById("response").innerHTML = reply;
+    //    var checkedValue = $('input:checkbox:checked').map(function() {
+    //        console.log(checkedValue);
+    //        return this.value;
+    //    }).get().join(',');
+
+
+
+    // Canvas.js file     
+    window.onclick = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: ""
+            },
+            data: [
+                {
+                    type: "pie",
+                    dataPoints: [
+                        {
+                            y: parseInt(percentagesBeen),
+                            indexLabel: "Percentages of European Countries you have been to."
+                        },
+                        {
+                            y: parseInt(percentagesYetToVisit),
+                            indexLabel: "Percentages of European Countries yet to Visit."
+                        }
+			]
+		}
+		]
+        });
+        chart.render();
+    }
+};
