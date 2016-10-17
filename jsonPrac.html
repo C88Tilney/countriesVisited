@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            function ajax_get_json(){
+    
+    var hr = new XMLHttpRequest();
+   
+
+    hr.open("GET", "mylist.json", true);
+    
+    hr.setRequestHeader("Content-type", "application/json", true);
+   
+    hr.onreadystatechange = function() {
+	    if(hr.readyState == 4 && hr.status == 200) {
+            var data = JSON.parse(hr.responseText);
+            var results = document.getElementById("results");
+            results.innerHTML = "";
+            for(var obj in data) {
+                results.innerHTML += '<input type="checkbox">'+data[obj].country+"<br/>";
+            }
+		   
+	    }
+    }
+
+    hr.send(null); 
+    results.innerHTML = "requesting..."
+    
+}
+            
+        
+        </script>
+    </head>
+    <body>
+        <h1>Please select the Eurpoean countries that you have been to:</h1>
+        
+        <div id="results"></div>
+        
+        <script type="text/javascript">ajax_get_json();</script>
+        
+        <input type="button" value="Submit" id="calculate">
+        
+        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+        
+        <div id="response"></div>
+    </body>
+        
+        <script>
+        //ADD Event Listeners 
+document.getElementById("calculate").addEventListener("click", validate, false);
+
+
+//Validation Function
+function validate(){
+    var countryVisted = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    console.log(countryVisted);
+    var percentagesBeen = ((countryVisted/49)*100).toFixed(2);
+    var percentagesYetToVisit = 100-percentagesBeen;
+    console.log(percentagesBeen);
+    console.log(percentagesYetToVisit);
+    
+ 
+    
+    if (percentagesBeen = 0) { 
+       document.getElementById("response").innerHTML = "Do you live in Europe?";
+    }
+    else if (percentagesBeen > 0 && percentagesBeen <= 20) {
+        var reply = "You need to travel around Europe more!";
+    }
+    else if (percentagesBeen > 20 && percentagesBeen <= 50) {
+        var reply = "You pretty well Traveled, but you still need to got a lot to go!"
+    }
+    else if (percentagesBeen > 50) {
+        var reply = "Wow! Well Done! Not many more countries to Visit now!"
+    }
+    
+    document.getElementById("response").innerHTML = reply;
+//    var checkedValue = $('input:checkbox:checked').map(function() {
+//        console.log(checkedValue);
+//        return this.value;
+//    }).get().join(',');
+    
+    window.onclick = function () {
+	var chart = new CanvasJS.Chart("chartContainer",
+	{
+		title:{
+			text: ""
+		},
+		data: [
+		{
+			type: "pie",
+			dataPoints: [
+				{ y: parseInt(percentagesBeen), indexLabel: "Percentages of European Countries you have been to."},
+				{ y: parseInt(percentagesYetToVisit), indexLabel: "Percentages of European Countries yet to Visit."}
+			]
+		}
+		]
+	});
+	chart.render();
+}
+};      
+        </script>
+
+        <script type="text/javascript">
+
+	</script>
+	<script src="canvasjs.min.js"></script>
+    
+</html>
