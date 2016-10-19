@@ -2,24 +2,39 @@
 <html>
 
 <head>
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    
+    <!-- My Custom CSS -->
+    <link href="countries.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
- 
 </head>
 
 <body>
-    <h1>Please select the Eurpoean countries that you have been to:</h1>
-
-    <div id="results"></div>
-
-    <input type="button" value="Submit" id="calculate">
-
-    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-
-    <div id="response"></div>
+    <div class="title">
+        <h1>Please select the Eurpoean countries that you have been to:</h1>
+    </div>
+    <div class="countriesSelection">
+        <div id="results"></div>
+    </div>
+    <div class="submit">
+        <input type="button" class="buttom" value="Submit" id="calculate">
+    </div>
+    <div class="answer">
+        <div id="response"></div>
+    </div>
+    <div class="canvas">
+        <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+    </div>
+    
 </body>
 
-
+<!-- Javascript Files -->
 <script type="text/javascript" src="countries.js"></script>
 <script type="text/javascript" src="canvasjs.min.js"></script>
 

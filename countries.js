@@ -14,7 +14,7 @@ function ajax_get_json() {
             var results = document.getElementById("results");
             results.innerHTML = "";
             for (var obj in data) {
-                results.innerHTML += '<input type="checkbox">' + data[obj].country + "<br/>";
+                results.innerHTML += '<input type="checkbox">' + " " + data[obj].country + "<br/>";
             }
         }
     }
@@ -28,6 +28,7 @@ ajax_get_json();
 
 //ADD Event Listeners 
 document.getElementById("calculate").addEventListener("click", validate, false);
+document.getElementById("calculate").addEventListener("click", appear, false);
 
 //Validation Function
 function validate() {
@@ -66,20 +67,24 @@ function validate() {
     // Canvas.js file     
     window.onclick = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
+            backgroundColor: "transparent",
             title: {
                 text: ""
             },
             data: [
                 {
+                    indexLabelFontColor: "#000",
                     type: "pie",
                     dataPoints: [
                         {
                             y: parseInt(percentagesBeen),
-                            indexLabel: "Percentages of European Countries you have been to."
+                            indexLabel: "% of European countries you have been to",
+                            color: "#e53000"
                         },
                         {
                             y: parseInt(percentagesYetToVisit),
-                            indexLabel: "Percentages of European Countries yet to Visit."
+                            indexLabel: "% of European countries yet to isit",
+                            color: "#2caae2"
                         }
 			]
 		}
@@ -87,4 +92,20 @@ function validate() {
         });
         chart.render();
     }
+};
+
+
+// hide the div answer until onclick event
+
+
+
+$(function() {
+    $('#response').hide();
+});
+
+function appear() {  
+$('body').on("click", function() {
+    $('#response').show();
+    
+});
 };
