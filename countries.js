@@ -79,11 +79,11 @@ function validate() {
                         {
                             y: parseInt(percentagesBeen),
                             indexLabel: "% of European countries you have been to",
-                            color: "#e53000"
+                            color: "#f94000"
                         },
                         {
                             y: parseInt(percentagesYetToVisit),
-                            indexLabel: "% of European countries yet to isit",
+                            indexLabel: "% of European countries yet to visit",
                             color: "#2caae2"
                         }
 			]
