@@ -29,6 +29,8 @@ ajax_get_json();
 //ADD Event Listeners 
 document.getElementById("calculate").addEventListener("click", validate, false);
 document.getElementById("calculate").addEventListener("click", appear, false);
+document.getElementById("reset").addEventListener("click", reset, false);
+
 
 //Validation Function
 function validate() {
@@ -57,12 +59,6 @@ function validate() {
     console.log(reply);
 
     document.getElementById("response").innerHTML = reply;
-    //    var checkedValue = $('input:checkbox:checked').map(function() {
-    //        console.log(checkedValue);
-    //        return this.value;
-    //    }).get().join(',');
-
-
 
     // Canvas.js file     
     window.onclick = function () {
@@ -79,7 +75,7 @@ function validate() {
                         {
                             y: parseInt(percentagesBeen),
                             indexLabel: "% of European countries you have been to",
-                            color: "#f94000"
+                            color: "#e53000"
                         },
                         {
                             y: parseInt(percentagesYetToVisit),
@@ -94,11 +90,12 @@ function validate() {
     }
 };
 
+// reset function
+function reset() {
+    $('input[type="checkbox"]:checked').prop('checked',false);
+};
 
-// hide the div answer until onclick event
-
-
-
+/* hide the div answer until onclick event*/
 $(function() {
     $('#response').hide();
 });

@@ -12,6 +12,9 @@
     
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    
+    <!-- favicon  in tab -->
+    <link rel="icon" href="../../img/2logo.png"> 
 
 </head>
 
@@ -24,9 +27,15 @@
     </div>
     <div class="submit">
         <input type="button" class="buttom" value="Submit" id="calculate">
+        <input type="button" class="restart" value="Reset" id="reset">
     </div>
     <div class="answer">
         <div id="response"></div>
+        <select name="charttype" id="chartype" value="pie">
+            <option value="pie">Pie</option>
+            <option value="column">Column</option>
+
+        </select>
     </div>
     <div class="canvas">
         <div id="chartContainer" style="height: 400px; width: 100%;"></div>
