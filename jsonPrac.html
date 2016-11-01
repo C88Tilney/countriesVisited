@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     
     <!-- My Custom CSS -->
+    <link href="cssReset.css" rel="stylesheet">
     <link href="countries.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -31,21 +32,23 @@
     </div>
     <div class="answer">
         <div id="response"></div>
-        <select name="charttype" id="chartype" value="pie">
-            <option value="pie">Pie</option>
-            <option value="column">Column</option>
-
-        </select>
+        
     </div>
+    
+<!--
+    <select name="charttype" id="charttype" value="pie">
+            <option value="pie">Pie</option>
+            <option value="bar">Bar</option>
+    </select>
+-->
     <div class="canvas">
         <div id="chartContainer" style="height: 400px; width: 100%;"></div>
     </div>
     
-</body>
-
-<!-- Javascript Files -->
+    <!-- Javascript Files -->
 <script type="text/javascript" src="countries.js"></script>
 <script type="text/javascript" src="canvasjs.min.js"></script>
-
+    
+</body>
 
 </html>

@@ -1,3 +1,8 @@
+// default value
+//thetype = document.getElementById("charttype").value;
+
+
+
 // the AJAX get - It get the JSON file and fill it will all the countries
 
 function ajax_get_json() {
@@ -27,12 +32,23 @@ function ajax_get_json() {
 ajax_get_json();
 
 //ADD Event Listeners 
+
+
 document.getElementById("calculate").addEventListener("click", validate, false);
 document.getElementById("calculate").addEventListener("click", appear, false);
 document.getElementById("reset").addEventListener("click", reset, false);
 
+//document.getElementById("charttype").addEventListener("click", whichtype, false);
 
-//Validation Function
+//function to change the chart type when it is change by the user
+
+//function whichtype(){
+//    thetype = document.getElementById("charttype").value;
+//    //alert(thetype);    
+//};
+
+
+//Validation Function - counts all of the checkboxes that the user has click on
 function validate() {
     var countryVisted = document.querySelectorAll('input[type="checkbox"]:checked').length;
     console.log(countryVisted);
@@ -48,10 +64,10 @@ function validate() {
         var reply = "You need to travel around Europe more!";
     }
     else if (percentagesBeen > 20 && percentagesBeen <= 50) {
-        var reply = "You pretty well Traveled, but you still need to got a lot to go!";
+        var reply = "You're pretty well Traveled, but you still have a lot to visit!";
     } 
     else if (percentagesBeen > 50) {
-        var reply = "Wow! Well Done! Not many more countries to Visit now!";
+        var reply = "Wow! Well Done! Not many more countries to visit now!";
     }
     else {
         var reply = "error";
@@ -59,10 +75,19 @@ function validate() {
     console.log(reply);
 
     document.getElementById("response").innerHTML = reply;
+    
 
-    // Canvas.js file     
+    // Canvas.js file - this make the pie chart    
     window.onclick = function () {
         var chart = new CanvasJS.Chart("chartContainer", {
+                  axisX:{
+        valueFormatString: " ",
+        tickLength: 0,
+      },
+            axisY:{
+        labelFontColor: "#000",
+        //gridColor: "#000"
+      },
             backgroundColor: "transparent",
             title: {
                 text: ""
@@ -70,6 +95,7 @@ function validate() {
             data: [
                 {
                     indexLabelFontColor: "#000",
+                    // change the type of the chart
                     type: "pie",
                     dataPoints: [
                         {
@@ -87,22 +113,32 @@ function validate() {
 		]
         });
         chart.render();
-    }
-};
+    };
 
-// reset function
-function reset() {
-    $('input[type="checkbox"]:checked').prop('checked',false);
 };
 
 /* hide the div answer until onclick event*/
 $(function() {
-    $('#response').hide();
+    $('#response, #charttype, .canvas').hide();
 });
 
-function appear() {  
-$('body').on("click", function() {
-    $('#response').show();
+// reset function unclick all of the check boxes and make the pie chart and response div disapear
+function reset() {
+    $('input[type="checkbox"]:checked').prop('checked',false);
+    $('body').on("click", function() {
+    $('#response, #charttype, .canvas').hide();
     
 });
 };
+
+// appear div after function 
+
+function appear() {  
+$('body').on("click", function() {
+    $('#response, #charttype, .canvas').show();
+    
+    
+});
+};
+
+
